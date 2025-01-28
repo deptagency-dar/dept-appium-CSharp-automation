@@ -10,8 +10,10 @@
 
     <ItemGroup>
       <PackageReference Include="Appium.WebDriver" Version="7.0.0" />
+      <PackageReference Include="DotNetSeleniumExtras.PageObjects" Version="3.11.0" />
       <PackageReference Include="DotNetSeleniumExtras.WaitHelpers" Version="3.11.0" />
       <PackageReference Include="ExtentReports.Core" Version="1.0.3" />
+      <PackageReference Include="FluentAssertions" Version="8.0.1" />
       <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.3.0" />
       <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.1" />
       <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.1" />
@@ -23,9 +25,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <None Update="Apps\General-Store.apk">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </None>
         <None Update="ConfigFiles\appsettings.IOS.json">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>

@@ -12,21 +12,19 @@ namespace TCGPlayer_automation_tests
 {
     public class BaseTest 
     {
-        private DriverSetup _driverSetup;
         protected SampleScreen sampleScreen;
 
         [SetUp]
         public void SetUp()
         {
-            _driverSetup = new DriverSetup();
-            BaseScreen.driver.Value = _driverSetup.InitializeAppium();
+            DriverManager.GetInstance().InitializeDriver();
             sampleScreen = new SampleScreen();
         }
         
         [TearDown]
         public void TearDown()
         {
-            _driverSetup.TearDown();
+            DriverManager.GetInstance().TearDown();
         }
 
        

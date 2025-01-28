@@ -1,19 +1,19 @@
 using NUnit.Framework;
+using FluentAssertions;
 
 namespace TCGPlayer_automation_tests.Tests 
 {
     [TestFixture]
     public class SampleTest: BaseTest 
     {
-        [Description("Entering a VALID username and checking that the user is able to login")]
+        [Description("Verify error message when trying to login without password")]
         [Test]
         public void sampleTest() 
         {
-            sampleScreen.tapCountrySelector();
-            sampleScreen.tapCountry("Argentina");
-            sampleScreen.tapLetsShop();
-            
-            Assert.Equals(sampleScreen.getErrorMessageText(), "Please enter your name");
+            sampleScreen.typeName("QA");
+            sampleScreen.tapLogin();
+
+            sampleScreen.getErrorMessageText().Should().Be("Password is required");
         }
     }
 }

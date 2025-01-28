@@ -1,21 +1,26 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Support.UI;
+using TCGPlayer_automation_tests.Utils;
 
 namespace TCGPlayer_automation_tests
 {
-    public class BaseScreen
+    public abstract class BaseScreen
     {
-        public static ThreadLocal<AppiumDriver> driver = new ThreadLocal<AppiumDriver>();
-        public static AppiumDriver GetDriver() => driver.Value;
+        protected AppiumDriver driver;
 
-        public void tap(By element)
+        protected BaseScreen()
+        {
+            driver = DriverManager.GetInstance().GetDriver();
+        }
+
+        protected void tap(By element)
         {
             waitForElement(element);
             try
             {
-                GetDriver().FindElement(element).Click();
-                Report.test.Info($"Clicked on element {element}");
+                driver.FindElement(element).Click();
+                //Report.test.Info($"Clicked on element {element}");
             }
             catch (Exception e)
             {
@@ -24,13 +29,13 @@ namespace TCGPlayer_automation_tests
 
         }
 
-        public void type(By element, string text)
+        protected void type(By element, string text)
         {
             waitForElement(element);
             try
             {
-                GetDriver().FindElement(element).SendKeys(text);
-                Report.test.Info($"Sent keys to element {element}");
+                driver.FindElement(element).SendKeys(text);
+                //Report.test.Info($"Sent keys to element {element}");
             }
             catch (Exception e)
             {
@@ -39,11 +44,11 @@ namespace TCGPlayer_automation_tests
 
         }
         
-        public bool isElementAppears(By element)
+        protected bool isElementAppears(By element)
         {
             try
             {
-                GetDriver().FindElement(element);
+                driver.FindElement(element);
                 return true;
             }
             catch (Exception)
@@ -52,11 +57,11 @@ namespace TCGPlayer_automation_tests
             }
         }
 
-        public void waitForElement(By element)
+        protected void waitForElement(By element)
         {
             try
             {
-                new WebDriverWait(GetDriver(), TimeSpan.FromSeconds(10)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(element));
+                new WebDriverWait(driver, TimeSpan.FromSeconds(10)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(element));
             }
             catch (Exception e)
             {
@@ -64,11 +69,24 @@ namespace TCGPlayer_automation_tests
             }
         }
 
-        public void switchToNativeContext()
+        protected String getText(By element)
+        {
+            waitForElement(element);
+            if (driver.PlatformName.ToLower().Equals("ios"))
+            {
+                return driver.FindElement(element).Text;
+            }
+            else
+            {
+                return driver.FindElement(element).FindElement(By.ClassName("android.widget.TextView")).Text;
+            }
+        }
+
+        protected void switchToNativeContext()
         {
             try
             {
-                GetDriver().Context = "NATIVE_APP";
+                driver.Context = "NATIVE_APP";
                 Report.test.Info("Context has switched to native app");
             }
             catch (Exception e)
@@ -78,14 +96,14 @@ namespace TCGPlayer_automation_tests
 
         }
 
-        public void switchToWebViewContext(string requiredContext)
+        protected void switchToWebViewContext(string requiredContext)
         {
             try
             {
-                foreach (var context in GetDriver().Contexts)
+                foreach (var context in driver.Contexts)
                 {
                     if (context.Contains(requiredContext))
-                        GetDriver().Context = context;
+                        driver.Context = context;
                 }
                 Report.test.Info($"Context has switched to webview {requiredContext}");
             }
