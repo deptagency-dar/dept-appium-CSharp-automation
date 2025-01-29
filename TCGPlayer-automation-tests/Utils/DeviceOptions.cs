@@ -18,12 +18,12 @@ public abstract class DeviceOptions
             AppiumOptions appiumOptions = new AppiumOptions()
             {
                 AutomationName = AutomationName.AndroidUIAutomator2,
-                PlatformName = "Android",
-                DeviceName = "Android pixel9simulator",
-                App = "Apps/Android.SauceLabs.Mobile.Sample.app.2.7.1.apk"
+                PlatformName = Config.ReadFromAppSettings("PlatformName"),
+                DeviceName = Config.ReadFromAppSettings("DeviceName"),
+                App = Config.ReadFromAppSettings("App")
             };
-            appiumOptions.AddAdditionalAppiumOption(AndroidMobileCapabilityType.AppPackage, "com.swaglabsmobileapp");
-            appiumOptions.AddAdditionalAppiumOption(AndroidMobileCapabilityType.AppActivity, "com.swaglabsmobileapp/.MainActivity");
+            appiumOptions.AddAdditionalAppiumOption(AndroidMobileCapabilityType.AppPackage, Config.ReadFromAppSettings("AppPackage"));
+            appiumOptions.AddAdditionalAppiumOption(AndroidMobileCapabilityType.AppActivity, Config.ReadFromAppSettings("AppActivity"));
             return appiumOptions;
         }
     }
@@ -34,9 +34,9 @@ public abstract class DeviceOptions
             return new AppiumOptions()
             {
                 AutomationName = AutomationName.iOSXcuiTest,
-                PlatformName = "iOS",
-                DeviceName = "iosSimulator16",
-                App = "Apps/iOS.Simulator.SauceLabs.Mobile.Sample.app.2.7.1.app"
+                PlatformName = Config.ReadFromAppSettings("PlatformName"),
+                DeviceName = Config.ReadFromAppSettings("DeviceName"),
+                App = Config.ReadFromAppSettings("App")
             };
         }
     }

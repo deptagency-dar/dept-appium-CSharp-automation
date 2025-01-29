@@ -1,6 +1,5 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
-using RazorEngine.Compilation.ImpromptuInterface.InvokeExt;
 
 namespace TCGPlayer_automation_tests;
 

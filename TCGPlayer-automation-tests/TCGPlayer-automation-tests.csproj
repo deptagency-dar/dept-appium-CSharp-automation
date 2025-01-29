@@ -25,11 +25,11 @@
     </ItemGroup>
 
     <ItemGroup>
-        <None Update="ConfigFiles\appsettings.IOS.json">
+        <None Update="ConfigFiles\appsettings.ios.json">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
-        <None Update="ConfigFiles\appsettings.Android.json">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <None Update="ConfigFiles\appsettings.android.json">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
     </ItemGroup>
 
