@@ -25,6 +25,12 @@
     </ItemGroup>
 
     <ItemGroup>
+        <None Update="ConfigFiles\global.config.json">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="Apps\iOS.Simulator.SauceLabs.Mobile.Sample.app.2.7.1.app">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
         <None Update="ConfigFiles\appsettings.ios.json">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>

@@ -5,15 +5,15 @@ using TCGPlayer_automation_tests.Utils;
 
 namespace TCGPlayer_automation_tests 
 {
-    public class BaseTest 
+    public class BaseTest
     {
+        protected static Report report = new Report();
         protected SampleScreen sampleScreen;
-        Report report = new Report();
         
         [OneTimeSetUp]
-        public void OneTimeSetUp()
+        public static void OneTimeSetUp()
         {
-            //TODO StartAppiumServer();
+            AppiumServer.getAppiumServer();
             report.StartReport();
         }
 
@@ -21,6 +21,7 @@ namespace TCGPlayer_automation_tests
         public void SetUp()
         {
             DriverManager.GetInstance().InitializeDriver();
+            Console.WriteLine("Driver initialized");
             sampleScreen = new SampleScreen();
             report.CreateTest();
         }
@@ -32,6 +33,10 @@ namespace TCGPlayer_automation_tests
             report.LogTestStatus();
             DriverManager.GetInstance().TearDown();
         }
+        
+        [OneTimeTearDown]
+        public void OneTimeTearDown() => AppiumServer.stopServer();
+
         
         private void AttachScreenshotToTheReport()
         {

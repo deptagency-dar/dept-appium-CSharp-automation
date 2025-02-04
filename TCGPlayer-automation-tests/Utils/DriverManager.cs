@@ -51,7 +51,7 @@ public sealed class DriverManager
     public AppiumDriver InitializeAndroid()
     {
         return new AndroidDriver(
-            new Uri("http://127.0.0.1:4723/"), 
+            AppiumServer.getAppiumServer().ServiceUrl,
             DeviceOptions.ANDROID.GetOptions()
         );
     }
@@ -59,7 +59,7 @@ public sealed class DriverManager
     public AppiumDriver InitializeiOS()
     {
         return new IOSDriver(
-            new Uri("http://127.0.0.1:4723/"), 
+            AppiumServer.getAppiumServer().ServiceUrl,
             DeviceOptions.IOS.GetOptions()
         );
     }
