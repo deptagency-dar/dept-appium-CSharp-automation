@@ -43,6 +43,6 @@ namespace TCGPlayer_automation_tests
             SaveTestDataToTheReport();
         }
 
-        public void SaveScreenshotToReport(string snapshotPath) => test.AddScreenCaptureFromPath(snapshotPath);
+        public void SaveScreenshotToReport(string snapshotPath) => test.AddScreenCaptureFromBase64String(snapshotPath);
     }
 }
